@@ -66,7 +66,7 @@ function buildCharts(sample) {
     var otuIDS = data.otu_ids.map((row) => `OTU ID: ${row}`);
 
     //  5. Create a variable that holds the first sample in the array.
-    var sampleValues = data.sample_values
+    var sampleValues = data.sample_values.slice(0, 10);
 
     // 6. Create variables that hold the (samples.json = js charts file) otu_ids = otudIDs, otu_labels = otuLables, and sample_values = sampleValues.
     var otuLabels = data.otu_Labels.map((label) =>
