@@ -49,7 +49,6 @@ function buildMetadata(sample) {
     Object.entries(result).forEach(([key, value]) => {
       PANEL.append("h6").text(`${key.toUpperCase()}: ${value}`);
     });
-
   });
 }
 
@@ -57,48 +56,52 @@ function buildMetadata(sample) {
 // 1. Create the buildCharts function.
 function buildCharts(sample) {
   // 2. Use d3.json to load and retrieve the samples.json file 
-  d3.json("samples.json").then(function({samples, metadata}) {
+  d3.json('samples.json').then(function ({ samples, metadata }) {
+
     // 3. Create a variable that holds the samples array. 
     var data = samples.filter((obj) => obj.id == sample)[0];
+    console.log(data);
 
     // 4. Create a variable that filters the samples for the object with the desired sample number.
     // Skills used - .map(): https://www.w3schools.com/jsref/jsref_map.asp
-    var otuIDs = data.otu_ids.map((row) => `OTU ID: ${row}`);
+    var otuIDS = data.otu_ids.map((row) => `OTU ID: ${row}`);
 
     //  5. Create a variable that holds the first sample in the array.
-    var sampleValues = data.sample_values;
+    var sampleValues = data.sample_values.slice(0, 10);
 
     // 6. Create variables that hold the (samples.json = js charts file) otu_ids = otudIDs, otu_labels = otuLables, and sample_values = sampleValues.
-    var otuLabels = data.otu_Labels.map((label) =>
-    label.replace(/\;/g, ', '));
+    var sampleLabels = data.otu_labels.map((label) => 
+      label.replace(/\;/g, ', ')
+    );
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
     //  so the otu_ids with the most bacteria are last. 
-
-  var yticks = data.sample_values.slice(0, 10);
+    // var yticks = data.sample_values.slice(0, 10);
 
     // 8. Create the trace for the bar chart. 
-    var trace = {
-      x: sampleValues,
-      y: otuIDs,
-      type: "bar"
-    };
-    var barData = [trace];
+    var data1 = [
+      {
+        x: sampleValues,
+        y: otuIDS,
+        type: 'bar',
+        orientation: 'h',
+        text: sampleLabels,
+        hoverinfo: 'text',
+      },
+    ];
     // 9. Create the layout for the bar chart. 
-    var barLayout = {
-      title: "The Top 10 Bacteria Cultures Found",
-      xaxis: { title: "xaxisHOLDER" },
-      yaxis: { title: "yaxisHOLDER"}
+    var layout1 = {
+      margin: {
+        t: 40,
+        l: 150,
+      },
+      title: {
+        text: 'Top 10 Bacterial Species (OTUs)',
+      },
     };
+
     // 10. Use Plotly to plot the data with the layout. 
-    Plotly.newPlot('bar', barData, barLayout);
+    Plotly.newPlot('bar', data1, layout1);
   });
-}
-
-// ------------------------------------------ DELIVERABLE #2 --------------------------------------------------
-
-
-
-
-// ------------------------------------------ DELIVERABLE #3 --------------------------------------------------
+};
