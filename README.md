@@ -1,4 +1,4 @@
-# plotlydiploy
+# PlotlyDiploy, Making Use of Plotly
 
 ## Objective
 I used plotly.js, a visualization library in JavaScript, to create an interactive webpage. This endeavor afforded me with the opportunity to practice my javascript and html skills, and to use of D3.json() to peer over json data and subsequently make graphs. This also required refactoring bits of the code along the way which gave me experience making use of variables, arrays, and dictionaries I already spent hard time coding.
