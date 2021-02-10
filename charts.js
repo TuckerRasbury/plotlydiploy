@@ -52,7 +52,9 @@ function buildMetadata(sample) {
   });
 }
 
-// ------------------------------------------ DELIVERABLE #1 --------------------------------------------------
+// ------------------------------------------ DELIVERABLE #1 / BAR CHART
+// Tips from plotly: https://plotly.com/javascript/bar-charts/
+
 // 1. Create the buildCharts function.
 function buildCharts(sample) {
   // 2. Use d3.json to load and retrieve the samples.json file 
@@ -80,7 +82,7 @@ function buildCharts(sample) {
     // var yticks = data.sample_values.slice(0, 10);
 
     // 8. Create the trace for the bar chart. 
-    var data1 = [
+    var barData = [
       {
         x: sampleValues,
         y: otuIDS,
@@ -90,8 +92,9 @@ function buildCharts(sample) {
         hoverinfo: 'text',
       },
     ];
+    
     // 9. Create the layout for the bar chart. 
-    var layout1 = {
+    var barLayout = {
       margin: {
         t: 40,
         l: 150,
@@ -102,6 +105,34 @@ function buildCharts(sample) {
     };
 
     // 10. Use Plotly to plot the data with the layout. 
-    Plotly.newPlot('bar', data1, layout1);
+    Plotly.newPlot('bar', barData, barLayout);
   });
+
+// ------------------------------------------ DELIVERABLE #2 / BUBBLE CHART
+// Tips from plotly: https://plotly.com/javascript/bubble-charts/
+    // 1. Create the trace for the bubble chart.
+    var bubbleData = [ 
+      {
+        type: 'scatter',
+        mode: 'markers',
+        x: otuIDS,
+        y: sampleValues,
+        text: sampleLabels,
+        markers: {
+          size: sampleValues,
+          color: otuIDS,
+        },
+      },
+    ];
+    
+    // 2. Create the layout for the bubble chart.
+    var bubbleLayout = {
+      title: {
+        text: 'Holding',
+      },
+
+    };
+
+    // 3. Use Plotly to plot the data with the layout.
+    Plotly.plot('bubble', bubbleData, bubbleLayout)
 };
