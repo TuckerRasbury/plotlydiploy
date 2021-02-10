@@ -84,7 +84,7 @@ function buildCharts(sample) {
     // 8. Create the trace for the bar chart. 
     var barData = [
       {
-        x: sampleValues,
+        x: sampleValues.sort(function(a,b){return a-b}),
         y: otuIDS,
         type: 'bar',
         orientation: 'h',
@@ -106,33 +106,35 @@ function buildCharts(sample) {
 
     // 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot('bar', barData, barLayout);
-  });
+    
 
-// ------------------------------------------ DELIVERABLE #2 / BUBBLE CHART
-// Tips from plotly: https://plotly.com/javascript/bubble-charts/
+    // ------------------------------------------ DELIVERABLE #2 / BUBBLE CHART
+    // Tips from plotly: https://plotly.com/javascript/bubble-charts/
     // 1. Create the trace for the bubble chart.
-    var bubbleData = [ 
-      {
-        type: 'scatter',
-        mode: 'markers',
-        x: otuIDS,
-        y: sampleValues,
-        text: sampleLabels,
-        markers: {
-          size: sampleValues,
-          color: otuIDS,
-        },
+    var bubbleData = [{
+      x: data.otu_ids,
+      y: data.sample_values,
+      type: 'scatter',
+      /*dataSorting: { 
+        enabled: true
+        sortKey: 'otuIDS'
+      },*/
+      text: sampleLabels,
+      mode: 'markers',
+      marker: {
+        size: data.sample_values,
+        color: data.otu_ids,
       },
-    ];
+    }];
     
     // 2. Create the layout for the bubble chart.
     var bubbleLayout = {
-      title: {
-        text: 'Holding',
-      },
-
+      xaxis: {title: 'otuIDS'},
     };
 
     // 3. Use Plotly to plot the data with the layout.
     Plotly.plot('bubble', bubbleData, bubbleLayout)
+
+    // ------------------------------------------ DELIVERABLE #2 / BUBBLE CHART
+  });
 };
