@@ -138,6 +138,18 @@ function buildCharts(sample) {
 
     // ------------------------------------------ DELIVERABLE #3 / GAUGE CHART
 
+    // 4. Create the trace for the gauge chart.
+    var gaugeData = [
+     
+    ];
+    
+    // 5. Create the layout for the gauge chart.
+    var gaugeLayout = { 
+     
+    };
+
+    // 6. Use Plotly to plot the gauge data and layout.
+    Plotly.plot('gauge', gaugeData, gaugeLayout)
 
   });
 };
