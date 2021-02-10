@@ -129,12 +129,15 @@ function buildCharts(sample) {
     
     // 2. Create the layout for the bubble chart.
     var bubbleLayout = {
+      title: {text: 'Bacteria Cultures per Sample'},
       xaxis: {title: 'otuIDS'},
     };
 
     // 3. Use Plotly to plot the data with the layout.
     Plotly.plot('bubble', bubbleData, bubbleLayout)
 
-    // ------------------------------------------ DELIVERABLE #2 / BUBBLE CHART
+    // ------------------------------------------ DELIVERABLE #3 / GAUGE CHART
+
+
   });
 };
