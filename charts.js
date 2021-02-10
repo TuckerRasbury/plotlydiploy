@@ -138,9 +138,24 @@ function buildCharts(sample) {
 
     // ------------------------------------------ DELIVERABLE #3 / GAUGE CHART
 
+    // 1. Create a variable that filters the metadata array for an object in the array whose id 
+    // property matches the ID number passed into buildCharts() function as the argument.
+    var metadataFilter = metadata.filter((obj) => obj.id == sample)[0];
+
+    // 2. -3 Create a variable that holds the first sample in the array and
+    // converts the washing frequency to a floating point number.
+    washFrequency = metadataFilter.wfreq;
+
     // 4. Create the trace for the gauge chart.
     var gaugeData = [
-     
+      {
+        //domain: ,
+        value: washFrequency,
+        title: {text: 'Belly Button Washing Frequency'},
+        type: 'indicator',
+        mode: 'gauge+number',
+        gauge: {axis: {range: [,10]}}
+      }
     ];
     
     // 5. Create the layout for the gauge chart.
